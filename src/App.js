@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import edfHeader from './edf-header';
-// import './open-color.css';
 import './App.css';
 
 /*
