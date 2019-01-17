@@ -103,7 +103,6 @@ function App() {
   const [hoveredItem, setHoveredItem] = useState('NONE');
   return (
     <div className="App">
-      <h1>EDF Structure</h1>
       <Grid hoveredItem={hoveredItem} setHoveredItem={setHoveredItem} />
       <Legend hoveredItem={hoveredItem} setHoveredItem={setHoveredItem} />
     </div>
@@ -114,13 +113,13 @@ function Grid({ hoveredItem, setHoveredItem }) {
   return (
     <div className="edf-grid colorable" onMouseLeave={() => setHoveredItem('NONE')}>
       {parsedHeader.map(({ className, value }, index) =>
-        <span
+        <code
           key={index}
           className={`${className} ${className.includes(hoveredItem) ? 'active' : ''}`}
           onMouseOver={() => setHoveredItem(className)}
         >
           {value}
-        </span>
+        </code>
       )}
     </div>
   );
@@ -134,7 +133,7 @@ function Legend({ hoveredItem, setHoveredItem }) {
           onMouseOver={() => setHoveredItem('static-header')}
           className={`${hoveredItem.includes('static-header') ? 'active' : ''}`}
         >
-          static header
+          Static Header
         </h2>
         <h3>&nbsp;</h3>
         <ul>
@@ -154,11 +153,11 @@ function Legend({ hoveredItem, setHoveredItem }) {
           onMouseOver={() => setHoveredItem('dynamic-header')}
           className={`${hoveredItem.includes('dynamic-header') ? 'active' : ''}`}
         >
-          dynamic header
+          Dynamic Header
         </h2>
         <div className="flex">
           <div>
-            <h3>part</h3>
+            <h3>Parts</h3>
             <ul>
               {dynamicFields.map(field =>
                 <li
@@ -172,7 +171,7 @@ function Legend({ hoveredItem, setHoveredItem }) {
             </ul>
           </div>
           <div>
-            <h3>channels</h3>
+            <h3>Channels</h3>
             <ul className="colorable">
               {channelNames.map((name, index) =>
                 <li
