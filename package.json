@@ -21,7 +21,9 @@
     "extends": "react-app"
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "scripts": {
     "build": "NODE_ENV=production rollup -c",
@@ -36,7 +38,7 @@
     "react-dom": "16.8.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/core": "7.1.6",
+    "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@svgr/rollup": "^4.1.0",
     "babel-eslint": "9.0.0",
