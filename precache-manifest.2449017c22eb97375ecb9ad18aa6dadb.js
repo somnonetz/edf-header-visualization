@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "2b84843a4e613acfacf7",
+    "revision": "435c0369a48fd8563407",
     "url": "/edf-header-visualization/static/css/main.9047e9aa.chunk.css"
   },
   {
-    "revision": "2b84843a4e613acfacf7",
-    "url": "/edf-header-visualization/static/js/main.2b84843a.chunk.js"
+    "revision": "435c0369a48fd8563407",
+    "url": "/edf-header-visualization/static/js/main.435c0369.chunk.js"
   },
   {
     "revision": "2950084b386b781b0c8f",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/edf-header-visualization/static/js/runtime~main.ee06ee77.js"
   },
   {
-    "revision": "21b624a6d1cd0d57da0a154769bc523f",
+    "revision": "b81b8ad8212074a2f5092e7b7255bb62",
     "url": "/edf-header-visualization/index.html"
   }
 ];
