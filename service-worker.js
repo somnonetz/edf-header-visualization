@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/edf-header-structure-visualization/precache-manifest.2060e6803b1bc045d36aaad47aab7ab2.js"
+  "/edf-header-visualization/precache-manifest.622541f2e08cc548a007d2a6aa663b2b.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/edf-header-structure-visualization/index.html", {
+workbox.routing.registerNavigationRoute("/edf-header-visualization/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
