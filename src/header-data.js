@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import edfHeader from './edf-header';
-import './App.css';
-
 /*
   == EDF Structure ==
 
@@ -65,11 +61,8 @@ const dynamicFields = [ /* eslint-disable no-multi-spaces, key-spacing */
   { name: 'dynamicReserved',   size: 32, description: 'reserved' },
 ]; /* eslint-enable no-multi-spaces, key-spacing */
 
-const numberOfSignals = +edfHeader.substr(252,4);
-const channelNames = Array.from(new Array(numberOfSignals)).map((val, index) => `channel-${index + 1}`);
-const parsedHeader = parseHeader(edfHeader);
-
 function parseHeader(header) {
+  const numberOfSignals = +header.substr(252, 4);
   let currentColor = 0;
   let index = 0;
   let result = [];
@@ -83,6 +76,7 @@ function parseHeader(header) {
     }
     currentColor = (currentColor + 1) % 10;
   });
+
 
   dynamicFields.forEach((field) => {
     for (let channel = 1; channel <= numberOfSignals; channel++) { // starts with 1
@@ -99,95 +93,4 @@ function parseHeader(header) {
   return result;
 }
 
-function App() {
-  const [hoveredItem, setHoveredItem] = useState('NONE');
-  return (
-    <div className="App">
-      <Grid hoveredItem={hoveredItem} setHoveredItem={setHoveredItem} />
-      <Legend hoveredItem={hoveredItem} setHoveredItem={setHoveredItem} />
-    </div>
-  );
-}
-
-function Grid({ hoveredItem, setHoveredItem }) {
-  return (
-    <div className="edf-grid colorable" onMouseLeave={() => setHoveredItem('NONE')}>
-      {parsedHeader.map(({ className, value }, index) =>
-        <code
-          key={index}
-          className={`${className} ${className.includes(hoveredItem) ? 'active' : ''}`}
-          onMouseOver={() => setHoveredItem(className)}
-        >
-          {value}
-        </code>
-      )}
-    </div>
-  );
-}
-
-function Legend({ hoveredItem, setHoveredItem }) {
-  return (
-    <div className={`legend flex ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
-      <div>
-        <h2
-          onMouseOver={() => setHoveredItem('static-header')}
-          className={`${hoveredItem.includes('static-header') ? 'active' : ''}`}
-        >
-          Static Header
-        </h2>
-        <h3>&nbsp;</h3>
-        <ul>
-          {staticFields.map(field =>
-            <li
-              key={field.name}
-              className={`${field.name} ${hoveredItem.includes(field.name) ? 'active' : ''}`}
-              onMouseOver={() => setHoveredItem(field.name)}
-            >
-                {field.description}
-            </li>
-          )}
-        </ul>
-      </div>
-      <div style={{ flex: 2 }}>
-        <h2
-          onMouseOver={() => setHoveredItem('dynamic-header')}
-          className={`${hoveredItem.includes('dynamic-header') ? 'active' : ''}`}
-        >
-          Dynamic Header
-        </h2>
-        <div className="flex">
-          <div>
-            <h3>Parts</h3>
-            <ul>
-              {dynamicFields.map(field =>
-                <li
-                  key={field.name}
-                  className={`${field.name} ${hoveredItem.includes(field.name) ? 'active' : ''}`}
-                  onMouseOver={() => setHoveredItem(field.name)}
-                >
-                    {field.description}
-                </li>
-              )}
-            </ul>
-          </div>
-          <div>
-            <h3>Channels</h3>
-            <ul className="colorable">
-              {channelNames.map((name, index) =>
-                <li
-                  key={name}
-                  className={`${name} ${hoveredItem.includes(name) ? 'active' : ''}`}
-                  onMouseOver={() => setHoveredItem(name)}
-                >
-                  {name} <span className={`color-bubble c${index % numberOfSignals}`} />
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default App;
+export { staticFields, dynamicFields, parseHeader };

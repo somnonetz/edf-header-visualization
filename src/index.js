@@ -1,12 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useMemo } from 'react';
+import { parseHeader } from './header-data';
+import EdfHeaderGrid from './EdfHeaderGrid';
+import EdfHeaderLegend from './EdfHeaderLegend';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const getChannelNames = (edfHeader) => {
+  const numberOfSignals = +edfHeader.substr(252, 4);
+  return Array.from(new Array(numberOfSignals)).map((val, index) => `channel-${index + 1}`);
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+function EdfHeaderVisualization({ edfHeader }) {
+  const parsedHeader = useMemo(() => parseHeader(edfHeader), [edfHeader]);
+  const channelNames = useMemo(() => getChannelNames(edfHeader), [edfHeader]);
+  const [hoveredItem, setHoveredItem] = useState('NONE');
+  const props = { hoveredItem, setHoveredItem };
+
+  return (
+    <div className="edf-header-visualization">
+      <EdfHeaderGrid parsedHeader={parsedHeader} {...props} />
+      <EdfHeaderLegend channelNames={channelNames} {...props} />
+    </div>
+  );
+}
+
+export { EdfHeaderVisualization, EdfHeaderGrid, EdfHeaderLegend, parseHeader };
