@@ -1,0 +1,28 @@
+{
+  "name": "edf-header-visualization-example",
+  "version": "1.0.0",
+  "description": "Interactively visualize the structure of the static and dynamic header of an EDF file",
+  "author": "maxbeier",
+  "license": "GPL-3.0",
+  "repository": "edfplus/edf-header-visualization",
+  "homepage": "https://edfplus.github.io/edf-header-visualization",
+  "dependencies": {
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
+    "react-scripts": "file:../node_modules/react-scripts",
+    "edf-header-visualization": "file:.."
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
