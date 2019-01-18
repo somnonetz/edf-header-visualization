@@ -20,24 +20,25 @@ import edfHeader from './edf-header';
 const App = () => <EdfHeaderVisualization edfHeader={edfHeader} />;
 ```
 
+or
+
 ```jsx
-import React from 'react';
-import { EdfHeaderGrid, EdfHeaderLegend, parseHeader } from 'edf-header-visualization';
+import React, { useState } from 'react';
+import { EdfHeaderGrid, EdfHeaderLegend } from 'edf-header-visualization';
 import edfHeader from './edf-header';
 
-/*
-  ... your code for `parsedHeader` and `channelNames` ...
- */
-
-const [hoveredItem, setHoveredItem] = useState('NONE');
-const props = { hoveredItem, setHoveredItem };
-
-const App = () => (
-  <div className="edf-header-visualization">
-    <EdfHeaderGrid parsedHeader={parsedHeader} {...props} />
-    <EdfHeaderLegend channelNames={channelNames} {...props} />
-  </div>
-);
+export default function App() {
+  const [hoveredItem, setHoveredItem] = useState('NONE');
+  const props = { edfHeader, hoveredItem, setHoveredItem };
+  return (
+    <div className="edf-header-visualization">
+      <h1>EDF Header Visualization</h1>
+      <EdfHeaderLegend {...props} />
+      <br />
+      <EdfHeaderGrid {...props} />
+    </div>
+  );
+}
 ```
 
 ## Development
@@ -46,14 +47,17 @@ const App = () => (
 
 ```sh
 npm install
-npm start
+npm start    # start rollup watcher
+npm publish  # publish to NPM
 ```
 
 ### Example 
 
 ```sh
 cd example
-npm start
+npm install
+npm start      # start dev server
+npm run deploy # deploy to Github Pages
 ```
 
 [npm-badge]: https://img.shields.io/npm/v/edf-header-visualization.svg?style=flat-square

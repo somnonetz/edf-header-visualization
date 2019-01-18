@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { staticFields, dynamicFields } from './header-data';
 
-export default function EdfHeaderLegend({ channelNames, hoveredItem, setHoveredItem }) {
+const getChannelNames = (edfHeader) => {
+  const numberOfSignals = +edfHeader.substr(252, 4);
+  return Array.from(new Array(numberOfSignals)).map((val, index) => `channel-${index + 1}`);
+};
+
+export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem }) {
+  const channelNames = useMemo(() => getChannelNames(edfHeader), [edfHeader]);
   return (
     <div className={`legend flex ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
       <div>

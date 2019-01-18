@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { parseHeader } from './header-data';
 
-export default function EdfHeaderGrid({ parsedHeader, hoveredItem, setHoveredItem }) {
+export default function EdfHeaderGrid({ edfHeader, hoveredItem, setHoveredItem }) {
+  const parsedHeader = useMemo(() => parseHeader(edfHeader), [edfHeader]);
   return (
     <div className="edf-grid colorable" onMouseLeave={() => setHoveredItem('NONE')}>
       {parsedHeader.map(({ className, value }, index) =>
