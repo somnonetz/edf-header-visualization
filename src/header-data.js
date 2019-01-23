@@ -44,8 +44,8 @@ const staticFields = [ /* eslint-disable no-multi-spaces, key-spacing */
   { name: 'recordHeaderByteSize',  size:  8, description: 'number of bytes in header record' },
   { name: 'staticReserved',        size: 44, description: 'reserved' },
   { name: 'numberOfDataRecords',   size:  8, description: 'number of data records' },
-  { name: 'recordDurationTime',    size:  8, description: 'duration of a data record, in seconds' },
-  { name: 'numberOfSignals',       size:  4, description: 'number of signals (ns) in data record' },
+  { name: 'recordDurationTime',    size:  8, description: 'duration of a data record (seconds)' },
+  { name: 'numberOfSignals',       size:  4, description: 'number of signals in data record' },
 ]; /* eslint-enable no-multi-spaces, key-spacing */
 
 const dynamicFields = [ /* eslint-disable no-multi-spaces, key-spacing */
@@ -57,40 +57,33 @@ const dynamicFields = [ /* eslint-disable no-multi-spaces, key-spacing */
   { name: 'digitalMinimum',    size:  8, description: 'digital minimum' },
   { name: 'digitalMaximum',    size:  8, description: 'digital maximum' },
   { name: 'preFiltering',      size: 80, description: 'prefiltering' },
-  { name: 'numberOfSamples',   size:  8, description: 'nr of samples in each data record' },
+  { name: 'numberOfSamples',   size:  8, description: 'number of samples in each data record' },
   { name: 'dynamicReserved',   size: 32, description: 'reserved' },
 ]; /* eslint-enable no-multi-spaces, key-spacing */
 
 function parseHeader(header) {
   const numberOfSignals = +header.substr(252, 4);
-  let currentColor = 0;
+  let color = 0;
   let index = 0;
-  let result = [];
 
-  staticFields.forEach((field) => {
-    for (let i = 0; i < field.size; i++) {
-      const className = `static-header ${field.name} c${currentColor}`;
-      const value = header[index];
-      result.push({ className, value });
-      index += 1;
-    }
-    currentColor = (currentColor + 1) % 10;
+  const staticHeader = staticFields.map(({ name, size }) => {
+    const values = header.slice(index, index + size).split('');
+    index += size;
+    color = (color + 1) % 10;
+    return { name, values, color };
   });
 
-
-  dynamicFields.forEach((field) => {
+  const dynamicHeader = [];
+  dynamicFields.forEach(({ name, size }) => {
     for (let channel = 1; channel <= numberOfSignals; channel++) { // starts with 1
-      for (let i = 0; i < field.size; i++) {
-        const className = `dynamic-header channel-${channel} ${field.name} c${currentColor}`;
-        const value = header[index];
-        result.push({ className, value });
-        index += 1;
-      }
-      currentColor = (currentColor + 1) % Math.min(numberOfSignals, 10);
+      const values = header.slice(index, index + size).split('');
+      index += size;
+      color = (channel - 1) % Math.min(numberOfSignals, 10);
+      dynamicHeader.push({ name , channel: `channel-${channel}`, values, color });
     }
   });
 
-  return result;
+  return { staticHeader, dynamicHeader };
 }
 
 export { staticFields, dynamicFields, parseHeader };

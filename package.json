@@ -1,6 +1,6 @@
 {
   "name": "edf-header-visualization",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Interactively visualize the structure of the static and dynamic header of an EDF file",
   "author": "maxbeier",
   "license": "GPL-3.0",

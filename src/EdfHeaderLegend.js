@@ -10,14 +10,13 @@ export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem
   const channelNames = useMemo(() => getChannelNames(edfHeader), [edfHeader]);
   return (
     <div className={`legend flex ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
-      <div>
+      <div className="container-static">
         <h2
           onMouseOver={() => setHoveredItem('static-header')}
           className={`${hoveredItem.includes('static-header') ? 'active' : ''}`}
         >
           Static Header
         </h2>
-        <h3>&nbsp;</h3>
         <ul>
           {staticFields.map(field =>
             <li
@@ -30,7 +29,7 @@ export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem
           )}
         </ul>
       </div>
-      <div style={{ flex: 2 }}>
+      <div className="container-dynamic">
         <h2
           onMouseOver={() => setHoveredItem('dynamic-header')}
           className={`${hoveredItem.includes('dynamic-header') ? 'active' : ''}`}
@@ -58,10 +57,10 @@ export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem
               {channelNames.map((name, index) =>
                 <li
                   key={name}
-                  className={`${name} ${hoveredItem.includes(name) ? 'active' : ''}`}
+                  className={`${name} ${hoveredItem.includes(name) ? 'active' : ''} c${index % Math.min(channelNames.length, 10)}`}
                   onMouseOver={() => setHoveredItem(name)}
                 >
-                  {name} <span className={`color-bubble c${index % channelNames.length}`} />
+                  {name} <code className="color-bubble" />
                 </li>
               )}
             </ul>
