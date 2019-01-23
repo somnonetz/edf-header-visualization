@@ -12,3 +12,38 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+/* Dropzone */
+
+.dropzone {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dropzone.active   {
+  border-color: #bbb;
+  background-color: #ddd;
+}
+
+/* Legend */
+
+.edf-header-visualization .legend {
+  max-width: 16rem;
+  margin: 0;
+}
+
+.edf-header-visualization .legend .flex,
+.edf-header-visualization .legend.flex {
+  display: block;
+}
+
+.edf-header-visualization .legend .container-dynamic h2 {
+  margin-top: 1rem;
+}
+
+.edf-header-visualization .legend .container-static h2 {
+  margin-bottom: 1rem;
+}
