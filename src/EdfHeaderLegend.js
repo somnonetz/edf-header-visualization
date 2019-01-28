@@ -9,7 +9,7 @@ const getChannelNames = (edfHeader) => {
 export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem }) {
   const channelNames = useMemo(() => getChannelNames(edfHeader), [edfHeader]);
   return (
-    <div className={`legend flex ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
+    <div className={`edf-legend edf-flex ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
       <div className="container-static">
         <h2
           onMouseOver={() => setHoveredItem('static-header')}
@@ -36,7 +36,7 @@ export default function EdfHeaderLegend({ edfHeader, hoveredItem, setHoveredItem
         >
           Dynamic Header
         </h2>
-        <div className="flex">
+        <div className="edf-flex">
           <div>
             <h3>Parts</h3>
             <ul>

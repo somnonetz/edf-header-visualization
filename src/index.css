@@ -26,9 +26,24 @@
 }
 
 .edf-grid code {
+  overflow: hidden;
   font-size: .85em;
   line-height: 1.6;
   text-align: center;
+}
+
+@supports not (display: grid) {
+  .edf-grid .header,
+  .edf-grid .group {
+    display: inline;
+  }
+}
+
+@supports not (display: contents) {
+  .edf-grid code {
+    float: left;
+    outline: 1px solid white;
+  }
 }
 
 .edf-grid.version .version code,
@@ -113,37 +128,37 @@
 
 /* Flexgrid */
 
-.flex {
+.edf-flex {
   margin: 0 -.5em;
   display: flex;
 }
 
-.flex > * {
+.edf-flex > * {
   flex: 1;
   margin: 0 .5em;
 }
 
 /* Legend */
 
-.legend {
+.edf-legend {
   margin-top: 1em;
 }
 
-.legend ul {
+.edf-legend ul {
   margin: 0;
   padding: 0;
 }
 
-.legend .container-static h2 {
+.edf-legend .container-static h2 {
   margin-bottom: 1.85rem;
 }
 
-.legend .container-dynamic {
+.edf-legend .container-dynamic {
   flex: 2;
 }
 
-.legend h2,
-.legend li {
+.edf-legend h2,
+.edf-legend li {
   margin: 0;
   list-style: none;
   background: #f6f6f6;
@@ -152,22 +167,22 @@
   cursor: pointer;
 }
 
-.legend li {
+.edf-legend li {
   margin-top: -1px;
   line-height: 1.5;
 }
 
-.legend h1,
-.legend h2,
-.legend h3 { line-height: 1; }
-.legend h2 { padding: 4px 5px 5px; }
-.legend h3 { margin: 6px 5px 7px; }
+.edf-legend h1,
+.edf-legend h2,
+.edf-legend h3 { line-height: 1; }
+.edf-legend h2 { padding: 4px 5px 5px; }
+.edf-legend h3 { margin: 6px 5px 7px; }
 
-.legend .active {
+.edf-legend .active {
   background-color: #a8ffaa;
 }
 
-.legend .color-bubble {
+.edf-legend .color-bubble {
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
