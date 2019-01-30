@@ -14,7 +14,7 @@ const Header = React.memo(({ groups, name, setHoveredItem }) => (
 const EdfHeaderGrid = ({ edfHeader, hoveredItem, setHoveredItem }) => {
   const parsedHeader = useMemo(() => parseHeader(edfHeader), [edfHeader]);
   return (
-    <div className={`edf-grid ${hoveredItem}`} onMouseLeave={() => setHoveredItem('NONE')}>
+    <div className={`edf-grid ${hoveredItem}`} onMouseLeave={() => setHoveredItem('')}>
       <Header groups={parsedHeader.staticHeader} name="static-header" setHoveredItem={setHoveredItem} />
       <Header groups={parsedHeader.dynamicHeader} name="dynamic-header" setHoveredItem={setHoveredItem} />
     </div>
